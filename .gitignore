@@ -1,0 +1,177 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Go build artifacts
+*.test
+*.out
+*.prof
+*.log
+
+# Go workspace file
+go.work
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.coverprofile
+coverage.out
+coverage.html
+*.cover
+
+# Dependency directories
+vendor/
+Godeps/
+
+# Go modules cache
+go.sum.bak
+
+# IDE - JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# IDE - VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# IDE - Vim
+*.swp
+*.swo
+*~
+.*.sw?
+
+# IDE - Emacs
+*~
+\#*\#
+.\#*
+
+# OS-specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Docker
+*.log
+docker-compose.override.yml
+.dockerignore.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+data/
+pgdata/
+postgres-data/
+redis-data/
+*.dump
+*.sql.gz
+
+# Redis
+dump.rdb
+appendonly.aof
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+secrets/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+credentials.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+*.swp
+
+# Build directories
+build/
+out/
+target/
+
+# Documentation build artifacts
+docs/_build/
+site/
+
+# Performance and profiling
+*.pprof
+cpu.prof
+mem.prof
+profile.out
+
+# gRPC generated files (if not committed)
+# Uncomment if you regenerate proto files locally
+# *.pb.go
+# *_grpc.pb.go
+
+# Air live reload (if used for development)
+tmp/
+.air.toml.local
+
+# Kubernetes local config (if testing k8s locally)
+*.kubeconfig
+kubeconfig
+
+# Certificates and keys
+*.csr
+*.der
+*.cer
+*.p7b
+*.p7c
+*.p8
+
+# Migration files output
+migrations/data/
+
+# Debug files
+__debug_bin
+debug
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Linux
+.directory
+.Trash-*
+
+# Windows
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
