@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package account;
+
+import "google/protobuf/timestamp.proto";
+
+
+option go_package = "DenisMekh/mini-transfer-system/account-svc;account_svc";
+
+service AccountService{
+  rpc CreateAccount(CreateAccountRequest) returns (Account);
+  rpc GetAccount (GetAccountRequest) returns (Account);
+  rpc UpdateBalance(UpdateBalanceRequest) returns (Account);
+}
+
+message Account {
+  string account_id = 1;
+  string user_id = 2;
+  string name = 3;
+  int64 balance = 4;
+  google.protobuf.Timestamp created_at = 5;
+
+}
+
+message CreateAccountRequest {
+  string user_id = 1;
+  string name = 2;
+}
+
+message GetAccountRequest {
+  string account_id = 1;
+}
+message UpdateBalanceRequest {
+  string account_id = 1;
+  int64 amount = 2;
+}

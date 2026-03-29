@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package transfer;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "DenisMekh/mini-transfer-system/transfer-svc;transfer_svc";
+
+service TransferService {
+  rpc CreateTransfer(CreateTransferRequest) returns (CreateTransferResponse);
+  rpc GetTransfer(GetTransferRequest) returns (Transfer);
+}
+enum TransferStatus {
+  TRANSFER_STATUS_PENDING = 0;
+  TRANSFER_STATUS_COMPLETED = 1;
+  TRANSFER_STATUS_FAILED = 2;
+}
+
+
+message CreateTransferRequest {
+  string idempotency_key = 1;
+  string from_user_id = 2;
+  string to_user_id = 3;
+  int64 amount = 4;
+}
+
+message CreateTransferResponse {
+  string request_id = 1;
+  bool is_transferred = 2;
+  TransferStatus transfer_status = 3;
+}
+
+message GetTransferRequest {
+  string transfer_id = 1;
+}
+
+message Transfer {
+  string transfer_id = 1;
+  TransferStatus transfer_status = 2;
+  string from_user_id = 3;
+  string to_user_id = 4;
+  int64 amount = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
