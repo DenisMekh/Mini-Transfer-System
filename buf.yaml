@@ -1,0 +1,14 @@
+version: v2
+
+modules:
+  - path: proto/account
+  - path: proto/transfer
+
+lint:
+  use:
+    - BASIC
+breaking:
+  use:
+    - WIRE
+    - FILE_NO_DELETE
+
