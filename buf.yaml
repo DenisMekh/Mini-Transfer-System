@@ -1,8 +1,7 @@
 version: v2
 
 modules:
-  - path: proto/account
-  - path: proto/transfer
+  - path: proto/
 
 lint:
   use:
