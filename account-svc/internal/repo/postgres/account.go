@@ -17,10 +17,10 @@ func NewAccountRepo(pool *pgxpool.Pool) *AccountRepo {
 	return &AccountRepo{pool: pool}
 }
 
-func (r *AccountRepo) CreateAccount(ctx context.Context, account *domain.Account) error {
+func (r *AccountRepo) Create(ctx context.Context, account *domain.Account) error {
 	const query = `
-INSERT INTO accounts (name) VALUES ($1) RETURNING account_id, created_at;`
-	err := r.pool.QueryRow(ctx, query, account.Name).Scan(&account.AccountID, &account.CreatedAt)
+INSERT INTO accounts (user_id, name) VALUES ($1, $2) RETURNING account_id, created_at;`
+	err := r.pool.QueryRow(ctx, query, account.UserID, account.Name).Scan(&account.AccountID, &account.CreatedAt)
 	if err != nil {
 		return err
 	}
@@ -29,9 +29,9 @@ INSERT INTO accounts (name) VALUES ($1) RETURNING account_id, created_at;`
 
 func (r *AccountRepo) GetByID(ctx context.Context, id string) (*domain.Account, error) {
 	const query = `
-SELECT user_id, name, balance, created_at FROM accounts WHERE account_id = $1;`
+SELECT account_id, user_id, name, balance, created_at FROM accounts WHERE account_id = $1;`
 	var account domain.Account
-	err := r.pool.QueryRow(ctx, query, id).Scan(&account.UserID, &account.Name, &account.Balance, &account.CreatedAt)
+	err := r.pool.QueryRow(ctx, query, id).Scan(&account.AccountID, &account.UserID, &account.Name, &account.Balance, &account.CreatedAt)
 	if errors.Is(err, pgx.ErrNoRows) {
 		return nil, domain.ErrNotFound
 	}
