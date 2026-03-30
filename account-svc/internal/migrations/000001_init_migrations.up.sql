@@ -2,8 +2,8 @@ CREATE TABLE accounts
 (
     account_id UUID PRIMARY KEY             DEFAULT gen_random_uuid(),
     user_id    UUID,
-    name       VARCHAR(255) UNIQUE NOT NULL,
-    balance    BIGINT                       DEFAULT 0,
+    name       VARCHAR(255) NOT NULL,
+    balance    BIGINT,
     created_at TIMESTAMP           NOT NULL DEFAULT NOW()
 );
 

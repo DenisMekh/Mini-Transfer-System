@@ -53,11 +53,7 @@ func RunMigrations(databaseURL string) error {
 	if err != nil {
 		return err
 	}
-	defer func() {
-		if err, err2 := m.Close(); err != nil || err2 != nil {
-			return
-		}
-	}()
+	defer m.Close()
 	if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
 		return err
 	}
