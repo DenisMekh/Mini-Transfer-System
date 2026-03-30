@@ -3,6 +3,6 @@ package domain
 import "errors"
 
 var (
-	ErrNotFound      = errors.New("не найден")
-	ErrAlreadyExists = errors.New("уже существует")
+	ErrNotFound      = errors.New("not found")
+	ErrAlreadyExists = errors.New("already exists")
 )

@@ -32,9 +32,13 @@ func (r *AccountRepo) GetByID(ctx context.Context, id string) (*domain.Account, 
 SELECT account_id, user_id, name, balance, created_at FROM accounts WHERE account_id = $1;`
 	var account domain.Account
 	err := r.pool.QueryRow(ctx, query, id).Scan(&account.AccountID, &account.UserID, &account.Name, &account.Balance, &account.CreatedAt)
-	if errors.Is(err, pgx.ErrNoRows) {
-		return nil, domain.ErrNotFound
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, domain.ErrNotFound
+		}
+		return nil, err
 	}
+
 	return &account, nil
 }
 
