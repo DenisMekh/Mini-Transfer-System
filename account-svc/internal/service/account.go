@@ -25,6 +25,6 @@ func (s *AccountServ) GetByID(ctx context.Context, id string) (*domain.Account, 
 
 	return s.repo.GetByID(ctx, id)
 }
-func (s *AccountServ) UpdateBalance(ctx context.Context, id string, amount int64) error {
+func (s *AccountServ) UpdateBalance(ctx context.Context, id string, amount int64) (*domain.Account, error) {
 	return s.repo.UpdateBalance(ctx, id, amount)
 }

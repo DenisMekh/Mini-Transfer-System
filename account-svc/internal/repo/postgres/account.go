@@ -42,16 +42,17 @@ SELECT account_id, user_id, name, balance, created_at FROM accounts WHERE accoun
 	return &account, nil
 }
 
-func (r *AccountRepo) UpdateBalance(ctx context.Context, id string, amount int64) error {
+func (r *AccountRepo) UpdateBalance(ctx context.Context, id string, amount int64) (*domain.Account, error) {
 	const query = `
-UPDATE accounts SET balance = balance + $1 WHERE account_id = $2;`
-	tag, err := r.pool.Exec(ctx, query, amount, id)
+UPDATE accounts SET balance = balance + $1 WHERE account_id = $2 RETURNING account_id, user_id, name, balance, created_at;`
+	var account domain.Account
+	err := r.pool.QueryRow(ctx, query, amount, id).Scan(&account.AccountID, &account.UserID, &account.Name, &account.Balance, &account.CreatedAt)
 	if err != nil {
-		return err
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, domain.ErrNotFound
+		}
+		return nil, err
 	}
-	if tag.RowsAffected() == 0 {
-		return domain.ErrNotFound
-	}
-	return nil
+	return &account, nil
 
 }

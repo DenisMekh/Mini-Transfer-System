@@ -10,5 +10,5 @@ import (
 type AccountService interface {
 	Create(ctx context.Context, account *domain.Account) error
 	GetByID(ctx context.Context, id string) (*domain.Account, error)
-	UpdateBalance(ctx context.Context, id string, amount int64) error
+	UpdateBalance(ctx context.Context, id string, amount int64) (*domain.Account, error)
 }
