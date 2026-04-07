@@ -10,12 +10,11 @@ import (
 )
 
 type Config struct {
-	Database DBConfig     `mapstructure:"database" required:"true"`
-	Server   ServerConfig `mapstructure:"server" required:"true"`
-	Log      LogConfig    `mapstructure:"log" required:"true"`
+	Database DBConfig     `mapstructure:"database" validate:"required"`
+	Server   ServerConfig `mapstructure:"server" validate:"required"`
+	Log      LogConfig    `mapstructure:"log" validate:"required"`
 }
 type DBConfig struct {
-	DSN               string        `mapstructure:"dsn"`
 	Host              string        `mapstructure:"host" validate:"required"`
 	Port              int           `mapstructure:"port" validate:"required"`
 	User              string        `mapstructure:"user" validate:"required"`
@@ -29,10 +28,8 @@ type DBConfig struct {
 	HealthCheckPeriod time.Duration `mapstructure:"health_check_period"`
 }
 type ServerConfig struct {
-	Host         string        `mapstructure:"host"`
-	Port         int           `mapstructure:"port"`
-	ReadTimeout  time.Duration `mapstructure:"read_timeout" validate:"required"`
-	WriteTimeout time.Duration `mapstructure:"write_timeout" validate:"required"`
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
 }
 type LogConfig struct {
 	Level    string `mapstructure:"level" validate:"required"`

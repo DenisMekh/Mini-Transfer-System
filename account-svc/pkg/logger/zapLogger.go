@@ -10,7 +10,6 @@ import (
 )
 
 type ZapLogger struct {
-	cfg    *config.Config
 	logger *zap.Logger
 }
 
@@ -26,7 +25,7 @@ var zapLogLevelMapping = map[string]zapcore.Level{
 func getLogLevel(cfg *config.LogConfig) zapcore.Level {
 	level, exists := zapLogLevelMapping[cfg.Level]
 	if !exists {
-		return zapcore.DebugLevel
+		return zapcore.InfoLevel
 	}
 	return level
 }
@@ -62,7 +61,6 @@ func New(cfg *config.Config) *ZapLogger {
 	core := zapcore.NewCore(encoder, zapcore.Lock(os.Stdout), level)
 	logger := zap.New(core, zap.AddCaller())
 	return &ZapLogger{
-		cfg:    cfg,
 		logger: logger,
 	}
 }
